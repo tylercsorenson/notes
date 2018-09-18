@@ -1,0 +1,109 @@
+MATH
+double myExponent = 6.02e23;
+Order of operations: (), !, */%+-, < <= > >=, == !=, &&, ||
+
+LOGIC
+switch (a) {
+   case 0:
+   //code
+   break;
+   
+   default:
+   //code
+   break;
+}
+
+myVariable = (condition) ? expressionWhenTrue : expressionWhenFalse;
+
+STRINGS AND CHARACTERS
+myString.at(index) = toupper(myString.at(index)); //Capitalize or edit character in a string
+myString.append(string2);
+isalpha(myChar), isdigit(myChar), isspace(myChar), isalnum(myChar), islower(myChar), isupper(myChar), isblank(myChar), isxdigit(myChar), ispunct(myChar), isprint(myChar), is cntrl(myChar) //Return true or false
+toupper(myChar), tolower(myChar) //Return result of operations
+myString.find(item) //Returns index of first appearance of item, or string::npos if not found
+myString.find(item, index) //Starts at index
+myString.substr(index, length)
+myString.erase(index, length)
+myString.push_back(myChar)
+myString.insert(index, subStr)
+myString.replace(index, length, subString)
+
+C-STRINGS
+char myCString[5] = "text"; //Compiler automatically appends '\0' to the end. Also, the size can be omitted
+
+#include <cstring>
+strcpy(destStr, sourceStr)
+strncpy(destStr, sourceStr, numChars)
+strcat(destStr, sourceStr) //Adds sourceStr to end of destStr
+strncat(destStr, sourceStr, numChars) //Adds numChars characters from sourceStr to end of destStr
+strchr(sourceStr, searchChar) //Returns NULL or address of first occurrence
+size_t strlen(sourceStr)
+int strcmp(str1, str2) //0 if str1 and str2 are equal, non-zero otherwise
+
+VECTORS/ARRAYS
+vector<dataType> myVector(size);
+vector<dataType> myVector(size, intialValue);
+vector<dataType> myVector = {value1, value2, value3};
+myVector.resize(number) //adds number elements, or removes number elements from the end
+myVector.erase(myVector.begin() + index)
+myVector.insert(myVector.begin() + index, value)
+
+int myArray[columns][rows]
+
+FUNCTIONS
+double MyFunction (double myArray[])
+MyFunction(myArray) //No brackets, passed in as a pointer
+
+STREAMS
+input.eof()
+input.fail() //Returns true if previous stream operation had an error
+ofstream output
+input.good()
+input.bad()
+input.clear() //clear error state
+input.ignore(maxToIgnore, stopChar) //can use numeric_limits<streamsize>::max()
+
+#include <sstream>
+istringstream iss(myString)
+iss.clear() //resets the stream's state
+ostringstream oss
+oss.str()
+
+cin uses whitespace as delimeter, but doesn't discard newline
+getline(stream, destination) does discard newline
+
+FILE INPUT/OUTPUT
+#include <fstream>
+ifstream input
+input.open("myFile.txt")
+if (!input.is_open()) 
+input.close()
+output.open("output.txt")
+
+OUTPUT
+doubles
+All output modifiers persist unless mentioned otherwise
+Total number of digits is equal to precision value (default is 6)
+fixed: number of digits in decimal portion is equal to precision
+scientific: scientific notation, number of digits in decimal portion is equal to precision
+setprecision(value): sets precision
+showpoint: decimal point with trailing zeros is printed
+setw(width): sets the number of characters for the following output item, default is right aligned and space filled
+setfill(myChar): select a different fill character other than space
+left/right: alter alignment
+endl: '\n' and flushes buffer]
+flush: flushes buffer
+
+CLASSES
+
+OTHER
+enum identifier {value1, value2} //value1 defaults to 0
+struct MyStruct { //Helpful to have a vector of structs
+   int myInt;
+}
+
+#include <cstdlib>
+rand() //Returns a random integer from 0 to RAND_MAX
+rand() % x //Returns a random integer from 0 to x-1
+srand(seed) //set seed, default is 1
+srand(time(0)) //Uses time as seed, so the random values are different each run of the program
