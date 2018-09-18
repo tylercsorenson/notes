@@ -37,6 +37,8 @@ strncpy(destStr, sourceStr, numChars)
 strcat(destStr, sourceStr) //Adds sourceStr to end of destStr
 strncat(destStr, sourceStr, numChars) //Adds numChars characters from sourceStr to end of destStr
 strchr(sourceStr, searchChar) //Returns NULL or address of first occurrence
+strrchr(sourceStr, searchChar) //Returns NULL or address of last occurrence
+strstr(str1, str2) //Returns null, or char* pointing to first occurrence of str2 within str1
 size_t strlen(sourceStr)
 int strcmp(str1, str2) //0 if str1 and str2 are equal, non-zero otherwise
 
@@ -95,6 +97,40 @@ endl: '\n' and flushes buffer]
 flush: flushes buffer
 
 CLASSES
+class SecondClass {
+public:
+   SecondClass() {}   //Need default constructor if you have a parameterized one
+   SecondClass(string input) {
+   this->message = input;
+   };
+private:
+   string message;
+};
+
+class MyClass {
+public:              //Accessible from outside the class
+   MyClass() {}
+   ~MyClass() {} //destructor (called when the object goes out of scope, or delete is called)
+   MyClass(string input) : mySecondClass(input) {}   //Use constructor initializer list when you need to explicitly call a class's constructor
+   int MyGetter() const;          //Function cannot mutate data members
+   
+   MyClass operator+(MyClass rightSide) {       //redefining operators
+      MyClass newClass;
+      newClass.myValue = myValue + rightSide.myValue;
+      return newClass; 
+   }
+protected:
+private:     //Accessible within class only
+   SecondClass mySecondClass;
+   int myValue;
+};
+
+int MyClass::MyGetter() const {}
+
+POINTERS
+int* = nullptr //pointer to an int
+&myInt //address of myInt
+*myPtr //dereferences myPtr
 
 OTHER
 enum identifier {value1, value2} //value1 defaults to 0
@@ -107,3 +143,22 @@ rand() //Returns a random integer from 0 to RAND_MAX
 rand() % x //Returns a random integer from 0 to x-1
 srand(seed) //set seed, default is 1
 srand(time(0)) //Uses time as seed, so the random values are different each run of the program
+
+namespace myNamespace {
+   class MyClass {};
+}
+myNamespace::MyClass yeet;
+
+#include "myFile.h" //looks in the same directory as the current file
+#include <stdfile> //looks in the system's standard library directory
+
+#ifndef
+#define
+#endif
+
+MODULAR COMPILATION
+Each source file is separately compiled into an object file (.o)
+Then the files can be linked together, and linked with libraries
+This reduces the time required to recompile, especially when a change is made in just a single file
+
+THROUGH 9.11

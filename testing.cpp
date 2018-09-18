@@ -1,11 +1,10 @@
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-using namespace std;
+namespace auditorium {
+  class Seat {};
+  // Other class definitions ...
+  // Function definitions ...
+  // Etc. 
+}
 
 int main() {
-   srand(time(0));
-   cout << rand() << endl;
    
-   return 0;
 }
