@@ -110,9 +110,12 @@ private:
 class MyClass {
 public:              //Accessible from outside the class
    MyClass() {}
+   MyClass(const MyClass& origClass);   //copy constructor, called when an object is passed by value into a function or created by assigning the value of one object to the other. A copy constructor is created by default, but problems can arise when a member is a pointer so you should define your own
    ~MyClass() {} //destructor (called when the object goes out of scope, or delete is called)
    MyClass(string input) : mySecondClass(input) {}   //Use constructor initializer list when you need to explicitly call a class's constructor
    int MyGetter() const;          //Function cannot mutate data members
+   
+   MyClass& operator=(const MyClass& objToCopy); //Use to redefine assignment operator, especially if a class has members that are pointers
    
    MyClass operator+(MyClass rightSide) {       //redefining operators
       MyClass newClass;
@@ -126,6 +129,8 @@ private:     //Accessible within class only
 };
 
 int MyClass::MyGetter() const {}
+
+If you explicitly define either destructor, copy constructor, or copy assignment operator, you should explicitly define all three
 
 POINTERS
 int* = nullptr //pointer to an int
@@ -161,4 +166,4 @@ Each source file is separately compiled into an object file (.o)
 Then the files can be linked together, and linked with libraries
 This reduces the time required to recompile, especially when a change is made in just a single file
 
-THROUGH 9.11
+THROUGH 9
