@@ -122,7 +122,7 @@ public:              //Accessible from outside the class
       newClass.myValue = myValue + rightSide.myValue;
       return newClass; 
    }
-protected:
+protected:   //Accessible by derived classes
 private:     //Accessible within class only
    SecondClass mySecondClass;
    int myValue;
@@ -131,6 +131,22 @@ private:     //Accessible within class only
 int MyClass::MyGetter() const {}
 
 If you explicitly define either destructor, copy constructor, or copy assignment operator, you should explicitly define all three
+
+INHERITANCE
+class ChildClass : public ParentClass {};  //public members of base class are public in derived, protected are protectd
+class ChildClass : protected ParentClass {}; //public -> protected, protected -> protected
+class ChildClass : private ParentClass {};  //public -> private, protected -> private
+
+class ChildClass : public ParentClass{
+public:
+   ChildClass(string myString) : ParentClass(name) {} //calling parent class constructor
+   string ToString(); //Overrides base class's ToString()
+};
+
+ParentClass::ToString(); //call parent class's ToString(), if it's been overwritten
+
+virtual void ToString(); //may be overridden in a derived class and for which runtime polymorphism is used (eg when you have a vector of object pointers)
+virtual void ToString() = 0; //pure virtual function, creates an abstract class. Child classes must implement the function in order to be declared
 
 POINTERS
 int* = nullptr //pointer to an int
@@ -166,4 +182,4 @@ Each source file is separately compiled into an object file (.o)
 Then the files can be linked together, and linked with libraries
 This reduces the time required to recompile, especially when a change is made in just a single file
 
-THROUGH 9
+THROUGH 10
