@@ -1,0 +1,42 @@
+Only including differences from C++
+
+BASICS
+Everything must be in a class
+Class contains main function
+
+I/O
+System.out.println("Tyler")
+
+Classes
+class MyClass {
+    public myClass() { //Constructor
+    
+    }
+    
+    public static void main(String[] args) {
+        myClass instance = new myClass();
+    }
+    
+    int myInt //Data member (instance variable)
+}
+
+class MyChild extends MyClass {} //Inheritance
+
+Data Structures
+import java.util.ArrayList
+ArrayList<Integer> myList = new ArrayList<Integer>() //Must use wrapped type, Integer instead of int
+myList.add(value)
+myList.get(index)
+myList.add(index, value)
+myList.size()
+
+HashMap<String, Integer> myFriends = new HashMap<String, Integer>()
+myFriends.put("Mark", 24)
+myFriends.get("Mark") //Returns value associated with the specified key
+myFriends.keySet() //Returns a list of the keys
+
+Loops
+for (Integer grade : quizGrades) //For each element in quizGrades, represented by grade
+
+static
+public

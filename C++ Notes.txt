@@ -1,0 +1,222 @@
+Vocab
+# - Hash sign, indicates preprocessor directive such as #include
+this is a statement; - Statement of code ends with semicolon
+using - using directive, eg using namespace
+std::cout - explicit qualification, alternative to "using" directive
+<< - insertion operator
+{} - (curly) braces
+[] - brackets
+<> - angle brackets
+
+Variable types and initialization
+int myInt - myInt is the identifier
+int myInt = 0; - c-like initialization
+int myInt (0); - constructor initialization
+int myInt {0}; - uniform initialization
+*All three methods of initialization are equivalent
+int foo = 0;
+auto bar = foo;
+decltype(foo) bar;
+*In both cases bar is given the same type as foo
+
+Operators
+++x - evaluates to final value of x
+x++ - evaluates to value of x before increase
+condition ? result1 : result2 - If condition is true, whole expression evaluates as result1, otherwise result2
+, - separates two or more expressions that are included where only 1 is expected. Right most expression is used if the set must be evaluated for a value
+myInt = (int) myFloat; myInt = int (myFloat); - Assigns int version of myFloat to myInt
+sizeof() - Returns size is bytes
+
+Basic Input/Output
+cerr - standard error (output) stream, not buffered
+clog - standard logging (output) stream
+endl - Flushes the buffer, where '\n' doesn't
+stringstream(myString) - allows myString to be treated as a stream like cin or cout
+
+Statements and flow control
+For loop - 3 fields in for loop are optional, but the 2 semicolons must be included
+For loop - can use comma operator to use multiple iterator variables
+for(declaration : range) statement; - declaration represents an element in range, where range is a container such as an array or string. Helpful to use auto with declaration
+myLabel: -A label
+goto myLabel; - Goes to myLabel
+
+Functions
+inline string myFunction() - Tells the compiler that inline expansion is preferred over the usual function call mechanism
+Function declaration only needs to include the parameter types, not necessarily their names
+
+Overloads and templates
+Overloaded functions - two functions that have the same name, but different parameters
+
+template <class T> (OR template <typename T>)
+T myFunction (T a, T b) {
+    return a + b;
+}
+x = myFunction<int>(10, 20); (OR x = myFunction(10, 20);) - Don't need the type in angle brackets if the type(s) is/are unambiguous
+
+template <class T, int N> - N must be a constant/literal (not a variable)
+
+Namespaces
+namespace identifier
+{
+    named_entities (eg int a, b;)
+}
+
+"using" introduces a name into the current declarative region, which means you don't need to qualify the name
+using myNamespace::myVariable;
+cout << myVariable; - Normally would need to put myNamespace::myVariable
+using namespace std;
+
+namespace newName = currentName;
+
+global or namespace variables use static storage, and are automatically initialized to 0
+local variables within a block are not automatically initialized.
+
+Arrays
+int foo[5] - Can have space between foo and [
+
+Following are all equivalent
+int foo[5] = {1, 2, 3, 4, 5}
+int foo[] = {1, 2, 3, 4, 5}
+int foo[] {1, 2, 3, 4, 5}
+
+int myFunction(int myArray[])
+
+Character sequences
+char myWord[] = {'H', 'i', '\0'};
+char myWord[] = "Hi";
+These two are the same, and is how the string literal "Hi" is represented
+
+Pointers
+&myVariable - Returns address of myVariable
+*myPointer - Returns the value of the address that myPointer is pointing to
+int* myPointer, int * myPointer, int *myPointer are all equivalent
+int myArray[5];
+int* myPointer = myArray - Valid
+*myPointer = 5; - Change first element of array
+*(myPointer + 1) = 6 - Change second element of array
+myPointer++ - changes myPointer to point to the next memory location (actual amount of change depends on the size of the variable that myPointer is pointing to)
+const int * ptr / int const * ptr- Read the value pointed to but not write, can change the pointer though
+int * const ptr - Pointer cannot be changed to reference something else, but can change the value?j
+const char * foo = "Hello" - Pointers can point to string literals, as they are actually an array of characters
+int ** ptr - Pointer to a pointer
+void* void_ptr - Pointer to void, which can be used to point to anything, but cannot be directly dereferenced
+(char*)void_ptr - Returns void_ptr as a pointer to a char?
+int (*myfunction)(int, int) - pointer to a function that takes 2 ints as arguments
+
+Dynamic memory
+foo = new int [5]; - If there isn't adequate memory, an exception will be thrown
+foo = new (nothrow) int [5]; - If there isn't enough memory on heap, foo will be nullptr
+
+Structs (Data structures)
+struct myStruct {
+//members
+} myStruct1, myStruct2; - If you declare instances of the struct like this, you don't need to create an identifier for the struct
+*Access members via dot/-> notation because default visibility of members is public
+
+Aliases
+typedef existing_type new_type_name; - Creates a type alias
+typedef char C;
+typedef unsigned int WORD;        //Examples
+typedef char * pChar;
+typedef char field [50]; - field now represents the type char[50]
+
+using new_type_name = existing_type; - Alternate method to create type alias
+using C = char;
+using WORD = unsigned int;
+using pChar = char *;
+using field = char [50];
+
+unions
+union type_name {
+member_type1 member_name1;
+member_type2 member_name2;
+} object name(s); - All members occupy the same space in memory, so altering one alters all of them
+
+If a union is part of a class/struct it doesn't need to have a name, you can just directly access the members inside with dot notation
+struct book {
+    union {
+    int myInt;    //Access myInt via book1.myUnion.myInt
+    } myUnion;
+} book1;
+
+struct book {
+    union {
+    int myInt;    //Access myInt via book1.myInt
+    };
+} book1;
+
+enums
+enum Enum {
+    value1,
+    value2
+} myEnumVariable;   //Creates new Enum object called myEnumVariable that can be assigned one of the values in the enum. The values are represented as integers starting at 0
+
+enum class Enum {  //Can replace "class" with "struct"
+    value1,
+    value2
+};
+
+Enum myEnum;
+myEnum = Enum::value1; //myEnum has value1 as its value (which is type enum)
+
+enum class myEnum : char {value1, value2}; //Objects of myEnum are represented by char in this class
+
+Classes (I)
+class Book {
+public:
+    Book(); //Default constructor
+    Book(int); //Parameterized constructor, if you make this then you should make a default constructor because the implicit doesn't work anymore
+
+private:
+    int numPages;
+} myBook;
+
+private members (default access level) of a class are accessible only from within other members of the same class (or from their "friends").
+protected members are accessible from other members of the same class (or from their "friends"), but also from members of their derived classes.
+
+Book::Book (int pages) {
+    numPages = pages;               //numPages is default constructed first, then reassigned to pages. If its type were a custom class, the class must have a default constructor defined
+}
+
+Book::Book (int pages) : numPages(pages) {} //numPages isn't default constructed
+
+Book myBook = 4;
+Book myBook {4};
+Book myBook = {4};      //All 4 call parameterized constructor
+Book myBook (4);
+
+Book myBook; //Calls default constructor
+Book myBook{}; //Calls default constructor
+Book myBook(); //Doesn't call default constructor
+
+Classes (II)
+Overloading Operators
+type operator sign (parameters) {body}
+
+Example
+#include <iostream>
+using namespace std;
+
+class CVector {
+  public:
+    int x,y;
+    CVector operator + (const CVector&);
+};
+
+CVector CVector::operator+ (const CVector& param) {
+  CVector temp;
+  temp.x = x + param.x;
+  temp.y = y + param.y;
+  return temp;
+}
+
+c = a + b; OR c = a.operator+(b);
+
+this
+Represents a pointer to the object whose member function is being executed
+
+Static members
+
+
+Random
+#define MY_CONST 3.14159 - Alternative to const MY_CONST 3.14159

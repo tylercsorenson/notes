@@ -1,0 +1,175 @@
+GENERAL
+; *Ends line
+3..10 *Returns an array of numbers from 3 to 10 (inclusive)
+a..b *Returns an array of letters from a to b (inclusive)
+<INPUT> *Reads line from file
+
+COMMENTS
+#This is a single line comment
+=podThis is a 
+multi line comment
+=cut
+
+OUTPUT
+print("Yeet!!\n"); *Parens are optional, note the newline character
+print "Yeet!!\n";
+"$x is replced with the value of x\n" *Double quotes allow variables and special characters (like \n) to be replaced
+'$x and \n are printed literally' *Single quotes
+print $yeet, " yaw\n"; *Prints multiple items
+
+Variables
+$myScalar *Contains a single string or numeric value
+@myArray *Contains a randomly accessed ordered set of values
+%myHash *Similar to a map/dicitonary
+$myNumber = 5;
+ref($myVar) *Returns the type of $myVar
+
+STRINGS
+$a . $b *Concatenates $a and $b
+$a x 3 *Returns 3 $a's together as 1 string
+
+Arrays
+@myArray = (5, 6, 7);
+print "$myArray[0]\n";
+$#myArray *The last index in array
+
+HASHES
+%myHash = ("Apple" => 5, "Banana" => 8);
+print "$myHash{\"Apple\"}\n";
+print "$myHash{$myArray[0]}\n";
+if exists $hash{$key}; *Returns true if the specified element of the has has been initialised
+
+Conditional Decision
+0, "0", "", empty array -> (), and undef are all considered false
+
+statement if (condition);
+
+if (condition) { *For if, elsif, and else don't need braces if there is only one statement
+statement(s);
+}
+elsif (condition) {
+statement;
+}
+else {
+statement
+}
+
+unless (condition) statement
+elsif (condition) statement
+else statement
+
+if (condition) statement1 else statement2 ==> (condition) ? statement1 : statement2
+
+<=> *Compares left and right numerical arguments and returns -1 if left is bigger, 0 if they are equal, and 1 if right is bigger
+==, !=, !, >, <, >=, <= *Same as C++
+
+STRING COMPARISONS
+eq *True if arguments are equal
+ne *True if not equal
+gt *True if left is greater than right
+lt *True if left is less than right
+ge *True if left is greater than or equal to right
+le *True if left is greater than or equal to right
+cmp *-1, 0, 1 if left is bigger, equal, right is bigger
+
+LOOPS
+while (condition) {block}
+until (condition) {block}
+for (init; condition; command) {block}
+foreach value (array) {block} *Executes block on each item in an array, with each item represented by value
+do {block} while (condition)
+next *Same as continue
+last *Same as break
+
+MATH
+Operators same as python
++=, -=, *=, /=, %=, **=, ++, --
+$a = $x++ *$a gets value of $x then $x is incremented
+$a = ++$x *$x is incremented, then both variables have the incremented value
+
+
+BITWISE
+Same as python
+
+Logical Operators
+and/&&
+or/||
+xor
+not/!
+
+REFERENCES (Pointers)
+$myRef = \@myArray
+@$myRef *Yields @myArray
+$yeet = \&myFunction
+
+SUBROUTINES (FUNCTIONS)
+sub myFunction {
+    body
+}
+
+myFunction(list of arguments);
+
+@_ *Array of arguments that can be accessed inside function definition
+$_[0] *First argument
+
+**Best to pass references to hashes and arrays into functions
+
+return(returnValue) *Must be a single value (ie scalar, reference)
+
+my $string *Creates local variable
+
+REGULAR EXPRESSIONS
+$string =~ m/regex/modifier *Returns true if #string matches pattern defined by the regex, can use any matching delimiting character eg m{}, m[], m||
+
+\ *Escape character (quote next character)
+. *Match any character except newline
+^ *Match beginning of string
+$ *Match end of string
+| *Separate between several possible patterns
+[] *Bracketed character class
+() *Grouping
+
+s/regex/replacement/modifier *Replaces first match found
+
+Modifiers:
+i *Makes match case insensitive
+o *Evaluates expression only once
+g *Replace all matches
+e *Evaluates the replacement as if it were a Perl statement and uses its return value as the replacement text
+
+$date = "Date:    2014-jun-01";
+if ($date =~ m/^Date:\s*([\d]+)-([a-z]+)-([\d]+)$/) {
+  print "The year is $1, the month is $2, the day is $3\n";
+}
+
+. Matches any single character except newline. Using the m modifier allows it to match newline as well.
+[...] Matches any single character within the brackets.
+[^...] Matches any single character not within brackets
+* Matches 0 or more occurrences of preceding expression.
++ Matches 1 or more occurrence of preceding expression.
+? Matches 0 or 1 occurrence of preceding expression.
+{n} Matches exactly n number of occurrences of preceding expression.
+{n,} Matches n or more occurrences of preceding expression.
+{n, m} Matches at least n and at most m occurrences of preceding expression.
+a|b Matches either a or b.
+\w Matches word characters.
+\W Matches nonword characters.
+\s Matches whitespace. Equivalent to [\t\n\r\f].
+\S Matches nonwhitespace.
+\d Matches digits. Equivalent to [0-9].
+\D Matches nondigits.
+\A Matches beginning of string.
+\Z Matches end of string. If a newline exists, it matches just before newline.
+\z Matches end of string.
+\G Matches point where last match finished.
+\b Matches word boundaries when outside brackets. Matches backspace (0x08) when inside brackets.
+\B Matches nonword boundaries.
+\n, \t, etc. Matches newlines, carriage returns, tabs, etc.
+\1...\9 Matches nth grouped subexpression.
+\10 Matches nth grouped subexpression if it matched already. Otherwise refers to the octal representation of a character code.
+
+
+
+
+
+

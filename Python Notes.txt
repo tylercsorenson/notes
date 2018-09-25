@@ -1,0 +1,192 @@
+PYTHON
+
+RANDOM
+\ *Continuation character, line after it is part of the previous line
+pass *Use as a placeholder where the program expects something
+
+INPUT/OUPUT
+print
+print() *Python 3
+newVariable = raw_input("Prompt for the user")
+print myString, myInt *Prints a space in between
+print myString, *Continues printing on the same line
+
+COMMENTS
+#This is a comment
+
+CODE BLOCKS
+*********: *Colon at end of line
+  ********* *Two spaces
+
+IMPORTING FROM MODULES
+import module
+import module1, module2
+import module as myModule
+module.function()
+from module import function1, function2
+function1()
+from module import * ->Imports everything from module
+dir(module) *Returns list of all elements of module
+from python_file import my_function
+
+MATH
+max(myList) *Can also simply take multiple arguments
+min(myList) *Can also simply take multiple arguments
+abs(myInt)
+from random import randint
+randint(low, high)
+myInt ** exponent
+
+DATE AND TIME
+from datetime import datetime
+now = datetime.now()
+now.month / now.day / now.hour / etc
+time.sleep(numSeconds)
+from time import strftime
+strftime("%A %B %d, %Y")
+
+STRINGS
+'myString'
+"myString"
+"""Multiple line
+string"""
+string1 + string2
+myString[index]
+len(myString)
+myString.lower() *Returns copy of myString all lower-case
+myString.upper() *Returns copy of myString all upper-case
+"Hello %s" % (myString) *%s is replaced with myString
+"%02d days left" % (myInt) *%02d is replaced with myInt, padded with 0's on the left to make it 2 characters long
+"%s and %s" % (myString1, myString2)
+"%.2f" (myFloat) *2 decimal places
+myString.isalpha()
+myString.split(splittingString) *Splits the string at each occurrence of splittingString, and puts the various segments into a list (whitespace is used as the default splitting element)
+'*' * 4 *Returns '****'
+
+FUNCTIONS
+def newFunction(parameter1, parameter2):
+def newFunction(*args): *Can take multiple arguments
+lambda x: x % 3 == 0 *Anonymous function, same as 
+def myFunction(x):
+  return x % 3 == 0
+myList = range(16)
+filter(lambda x: x % 3 == 0, myList) *Returns the elements of myList that pass the criteria of the anonymous function
+
+BOOLEANS AND LOGIC
+True
+False
+and
+or
+not
+if *********:
+elif **********:
+else:
+if myVariable not in range(5): *Checks to see if myVariable is in a list from 0 to 4
+if myVariable in myList: *Checks if myVariable is in myList
+
+VARIABLE TYPES
+str(myVariable) *Returns myVariable as a string
+int(myVariable) *Returns myVariable as an int
+float(myVariable) *Returns myVariable as a float
+type(myVariable) *Returns the type of the variable
+bin(myInt) *Returns myInt as a binary number
+int(myVariable, baseNumber) *Converts myVariable (in base baseNumber) into base 10
+
+LISTS
+listName = [item_1, item_2] *Declaring a list
+listName = [] *Declaring an empty list
+myList[index]
+len(myList)
+myList.append(newItem)
+myList[index1:index2] *Returns section of list from index1 to index one before index 2
+myList[:index] *Returns section of list from beginning to one before index
+myList[index:] *Returns section of list from index to end
+myList[start:end:stride]
+myList[::stride]
+myList.index(item) *Returns index of item
+myList.insert(index, item) *Inserts item at index, pushes other elements back
+myList.sort()
+myList.remove(item)
+myList.pop(index) *Removes the item at index, and returns it
+del(myList[index])
+list1 + list2
+myList = ['0'] * 5
+fillerString.join(myList) *Joins the contents of myList with fillerString in-between each one
+myList = [i for i in range(51) if i % 2 == 0]
+myList = [x * 3 for x in range(1, 6)]
+
+RANGE (range returns a list of numbers, starting at start going up to (but not including) stop, with step size step. start defaults to 0 and step defaults to 1)
+range(stop) 
+range(start, stop)
+range(start, stop, step)
+
+DICTIONARY (Each key references a value/item and values don't need to be the same type)
+myDictionary = {key1 : item1, key2 : item2}
+emptyDictionary = {}
+myDictionary[key] *Returns the value associated with the key
+myDictionary[newKey] = newValue
+myDictionary[existingKey] = newValue
+len(myDictionary) *Returns the number of key/value pairs
+del myDictionary[key] *Deletes the key and the value
+myDictionary[keyToList][indexInList]
+myDictionary.items() *Returns the keys and values as a list of tuples
+myDictionary.keys()
+myDictionary.values()
+
+LOOPS
+for variable in myList: *variable is equal to each element in the list as it iterates. Useful for looping through a list, but you can't modify it
+for i in range(len(myList)): *Allows you to modify the list as you loop through it by calling myList[i]
+for key in myDictionary: *Iterates through the keys
+for character in myString:
+for index, item in enumerate(myList):
+while condition:
+while condition:
+else: *else executes after the condition evaluates to False (so not a break)
+for variable in myList:
+else: *else executes after the loop exits normally
+
+BITWISE OPERATORS
+0b *Binary number eg 0b011101
+myInt << shiftAmount *Left shift, moves all bits in integer over by shiftAmount
+myInt >> shiftAmount *Right shift
+& *AND compares every index of two integers, and the corresponding index in the result is 1 if the index in both numbers is 1
+| *Bitwise OR
+^ *XOR true if one corresponding index is 1, but not both
+~ *NOT essentially adds 1 to the integer and makes it negative
+
+CLASSES
+class NewClass(object): *NewClass inherits from object in this case
+  generalCharacterisitc = True *Attribute that is common for all objects of a class
+  def __init__(self, newName): *Constructor for class, first parameter passed in is then the reference to the object itself
+    self.name = newName *Creating attribute called name, assigning newName to it
+  def newFunction(self):
+    print self.name
+myObject = NewClass(newName) *newName is put into constructor
+objectName = myObject.name
+*Override methods in parent classes simply by redefining it in the child class
+class DerivedClass(BaseClass):
+  def classMethod(self):
+    return super(DerivedClass, self).baseClassMethod(argument1, argument2)
+def __repr__(): *Defines how an object is represented (eg when printed)
+
+FILE INPUT/OUTPUT
+fileStream = open("myFile.txt", "w") *"w" stands for writing to the file
+'r' *Read only
+'r+' *Read and write
+'a' *Append mode
+fileStream.write("Hello!")
+fileStream.read()
+fileStream.readline()
+fileStream.close()
+fileStream.read().splitlines() *Returns a list of the lines in the string
+with open('textFile.txt', 'w') as textFile: *Automatically opens the file with __enter__() and closes the file with __exit__()
+myFile.closed *Returns True if the file has been closed
+
+RANDOM STUFF LEARNED
+os.getcwd() *Returns a string of the current working directory
+sys.path() *Returns a list of strings, first element is the path to the module/script
+matplotlib.pyplot *module that allows you to generate many kinds of plots quickly
+	figure *Creates a new figure
+matplotlib.gridspec *Specifies location of subplot in the figure
+	GridSpec *Class that specifies the geometry of the grid that a subplot will be placed
+		update *Update the current values

@@ -1,0 +1,91 @@
+Directories
+ls directory -> list contents of directory (can be used to see if a file or directory exists)
+ls *.txt -> lists all files ending in .txt
+ls -l -> long form of ls
+ls -rtl -> lists files by order of modification
+ls -a -> show all files
+mkdir myDir -> Creates a directory
+mv file1 file2 -> moves/renames file1 to file2
+cp file1 file2 -> copies contents of file1 into file2
+rm file -> removes file
+rm *.txt -f -> -f forces the removal, no user confirmation
+
+Files
+> -> redirect operator (echo "Hello" > text.txt, puts "Hello" and a newline into text.txt)
+>> -> append (echo "Next line!!" > text.txt)
+cat file -> prints contents of file to screen
+diff file1 file2
+touch file.txt -> Creates blank file
+head file.txt -> displays the first 10 lines of file.txt
+tail file.txt -> displays the last 10 lines of file.txt
+wc file.txt -> displays number of lines, words, and bytes in file
+less file.txt -> allows you to interactively view a file
+    move with arrow keys
+    spacebar or Ctrl-F -> page forward
+    Ctrl-B -> page backward
+    Q -> 
+    /word -> navigates to first instance of a match, N -> next, shift-N -> previous
+    G -> move to end of file
+    1G -> move to beginning
+grep word file.txt -> returns lines with word in them from the file
+
+Hotkeys
+cmd-T -> new tab
+Ctrl-C -> escape/cancel
+Ctrl-A -> Go to front of current line
+Ctrl-E -> Go to end of current line
+Ctrl-U -> Clears line
+option-click -> Select spot in command
+clear OR Ctrl-L -> Clears the screen
+exit or Ctrl-D -> Log out and exit
+Ctrl-R -> allows you to search previous commands
+
+General
+echo Hello -> Prints "Hello" to the screen
+man [command] -> Displays the manual for the specified command. Press 'Q' to quit
+which command -> checks if command is available on the system
+curl https://www.website.com/ -> displays source code of website
+curl -OL cdn.learnenough.com/sonnets.txt -> O will save sonnets.txt with the same name, L will enable a redirect if the file has moved
+!! -> runs the last command
+!curl -> runs the last curl command
+ping url -> pings url
+head file.txt | wc -> pipes output of head through wc command
+top -> displays processes consuming the most resources
+ps aux -> displays all processes being run
+ps aux | grep process -> finds process called process
+kill -15 12345 -> kills the process with id 12345
+pkill -15 -f hello -> kills all processes called hello
+
+Key	Symbol
+Command	⌘
+Control	⌃
+Shift	⇧
+Option	⌥
+Up, down, left, right	↑ ↓ ← →
+Enter/Return	↵
+Tab	⇥
+Delete	⌫
+
+
+
+
+
+git commands
+init -> Creates repository
+status
+add myFile.txt -> Adds to git staging area, -A means all files, . is current directory
+commit -> Makes the changes in the staging area part of the local repository, '-m' allows you to put message/note, '-a'commit changes on all files in repository, can combine with -am
+log
+diff -> Shows differences between last commit and unstaged changes
+
+git push --delete <remote_name> <branch_name>
+git branch -D branch_name
+
+
+UNTRACKED/UNSTAGED
+git add
+STAGED
+git commit
+LOCAL REPOSITORY
+git push
+REMOTE REPOSITORY
