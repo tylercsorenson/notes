@@ -14,10 +14,12 @@ int myInt = 0; - c-like initialization
 int myInt (0); - constructor initialization
 int myInt {0}; - uniform initialization
 *All three methods of initialization are equivalent
+
 int foo = 0;
 auto bar = foo;
 decltype(foo) bar;
 *In both cases bar is given the same type as foo
+
 #define MY_CONST 3.14159 - Alternative to const MY_CONST 3.14159
 
 MATH AND OPERATORS
@@ -44,6 +46,11 @@ namespace identifier
     named_entities (eg int a, b;)
 }
 
+namespace myNamespace {
+   class MyClass {};
+}
+myNamespace::MyClass yeet;
+
 "using" introduces a name into the current declarative region, which means you don't need to qualify the name
 using myNamespace::myVariable;
 cout << myVariable; - Normally would need to put myNamespace::myVariable
@@ -53,11 +60,6 @@ namespace newName = currentName;
 
 global or namespace variables use static storage, and are automatically initialized to 0
 local variables within a block are not automatically initialized.
-
-namespace myNamespace {
-   class MyClass {};
-}
-myNamespace::MyClass yeet;
 
 DYNAMIC MEMORY
 foo = new int [5]; - If there isn't adequate memory, an exception will be thrown
@@ -122,7 +124,8 @@ inline string myFunction() - Tells the compiler that inline expansion is preferr
 Function declaration only needs to include the parameter types, not necessarily their names
 Overloaded functions - two functions that have the same name, but different parameters
 
-myVariable = (condition) ? expressionWhenTrue : expressionWhenFalse;
+double MyFunction (double myArray[])
+MyFunction(myArray) //No brackets, passed in as a pointer
 
 STRINGS AND CHARACTERS
 myString.at(index) = toupper(myString.at(index)); //Capitalize or edit character in a string
@@ -153,6 +156,8 @@ switch (a) {
    //code
    break;
 }
+
+myVariable = (condition) ? expressionWhenTrue : expressionWhenFalse;
 
 C-STRINGS
 char myCString[5] = "text"; //Compiler automatically appends '\0' to the end. Also, the size can be omitted
@@ -190,10 +195,6 @@ int foo[] = {1, 2, 3, 4, 5}
 int foo[] {1, 2, 3, 4, 5}
 
 int myFunction(int myArray[])
-
-FUNCTIONS
-double MyFunction (double myArray[])
-MyFunction(myArray) //No brackets, passed in as a pointer
 
 BASIC INPUT/OUTPUT
 cerr - standard error (output) stream, not buffered
@@ -244,7 +245,7 @@ flush: flushes buffer
 CLASSES
 class SecondClass {
 public:
-   SecondClass() {}   //Need default constructor if you have a parameterized one
+   SecondClass() {}   //Should have default constructor if you have a parameterized one
    SecondClass(string input) {
    this->message = input;
    };
@@ -277,19 +278,15 @@ int MyClass::MyGetter() const {}
 
 If you explicitly define either destructor, copy constructor, or copy assignment operator, you should explicitly define all three
 
-
-Classes (I)
 class Book {
 public:
-    Book(); //Default constructor
-    Book(int); //Parameterized constructor, if you make this then you should make a default constructor because the implicit doesn't work anymore
+    Book(); 
+    Book(int);
 
 private:
     int numPages;
 } myBook;
 
-private members (default access level) of a class are accessible only from within other members of the same class (or from their "friends").
-protected members are accessible from other members of the same class (or from their "friends"), but also from members of their derived classes.
 
 Book::Book (int pages) {
     numPages = pages;               //numPages is default constructed first, then reassigned to pages. If its type were a custom class, the class must have a default constructor defined
@@ -306,7 +303,6 @@ Book myBook; //Calls default constructor
 Book myBook{}; //Calls default constructor
 Book myBook(); //Doesn't call default constructor
 
-Classes (II)
 Overloading Operators
 type operator sign (parameters) {body}
 
@@ -369,12 +365,27 @@ void* void_ptr - Pointer to void, which can be used to point to anything, but ca
 (char*)void_ptr - Returns void_ptr as a pointer to a char?
 int (*myfunction)(int, int) - pointer to a function that takes 2 ints as arguments
 
-OTHER
-enum identifier {value1, value2} //value1 defaults to 0
-struct MyStruct { //Helpful to have a vector of structs
-   int myInt;
+MODULAR COMPILATION
+Each source file is separately compiled into an object file (.o)
+Then the files can be linked together, and linked with libraries
+This reduces the time required to recompile, especially when a change is made in just a single file
+
+RECURSION
+Dividing a problem into smaller and smaller sections. A recursive function calls itself, and must have at least one base case (where the function isn't called further, and a value is returned), each call to the function should bring it closer to the base case. Make sure you handle all base cases
+
+EXCEPTIONS
+try {
+   //If error detected
+   throw objectOfExceptionType(message); //try block is exited, message is optional
+}
+catch (objectOfExceptionType& e) { //catch block is executed if exception was thrown
+   //handle exception
+   cout << e.what() << endl; //prints message
 }
 
+catch block can be outside of function where exception is thrown. The function call hierarchy is traversed until a suitable handler is found
+
+OTHER
 #include <cstdlib>
 rand() //Returns a random integer from 0 to RAND_MAX
 rand() % x //Returns a random integer from 0 to x-1
@@ -388,9 +399,4 @@ srand(time(0)) //Uses time as seed, so the random values are different each run 
 #define
 #endif
 
-MODULAR COMPILATION
-Each source file is separately compiled into an object file (.o)
-Then the files can be linked together, and linked with libraries
-This reduces the time required to recompile, especially when a change is made in just a single file
-
-THROUGH 10
+THROUGH 12.2
