@@ -22,6 +22,9 @@ decltype(foo) bar;
 
 #define MY_CONST 3.14159 - Alternative to const MY_CONST 3.14159
 
+static int myInt; //Can be accesed anywhere from within a program, if a datamember then it's a datamember for the whole class not just an instance/object
+static int GetMyInt(); //Can be used to access private static data members
+
 MATH AND OPERATORS
 ++x - evaluates to final value of x
 x++ - evaluates to value of x before increase
@@ -32,13 +35,23 @@ double myExponent = 6.02e23;
 Order of operations: (), !, */%+-, < <= > >=, == !=, &&, ||
 
 TEMPLATES
-template <class T> (OR template <typename T>)
+template <class T, class T2> (OR template <typename T>) //function template
 T myFunction (T a, T b) {
     return a + b;
 }
 x = myFunction<int>(10, 20); (OR x = myFunction(10, 20);) - Don't need the type in angle brackets if the type(s) is/are unambiguous
 
 template <class T, int N> - N must be a constant/literal (not a variable)
+
+template<typename T>
+class MyClass {
+public:
+   MyClass(T input);
+private:
+   T member;
+};
+
+MyClass<int> myClassInt(5); //declare instance of the class
 
 NAMESPACES
 namespace identifier
@@ -70,6 +83,8 @@ struct myStruct {
 //members
 } myStruct1, myStruct2; - If you declare instances of the struct like this, you don't need to create an identifier for the struct
 *Access members via dot/-> notation because default visibility of members is public
+
+structs are very useful when used in conjunction with vectors and functions (ie each element can store multiple values, and a function can return multiple values)
 
 ALIASES
 typedef existing_type new_type_name; - Creates a type alias
@@ -365,10 +380,37 @@ void* void_ptr - Pointer to void, which can be used to point to anything, but ca
 (char*)void_ptr - Returns void_ptr as a pointer to a char?
 int (*myfunction)(int, int) - pointer to a function that takes 2 ints as arguments
 
-MODULAR COMPILATION
+COMMAND LINE
+Modular compilation
 Each source file is separately compiled into an object file (.o)
 Then the files can be linked together, and linked with libraries
 This reduces the time required to recompile, especially when a change is made in just a single file
+g++ -c main.cpp yeet.cpp
+g++ -o main main.o yeet.o
+
+makefile //used to recomple and link a program whenever changes are made
+target : prerequisite1 prerequisite2
+   command1
+   command2
+   
+example with 3 files
+myprog.exe : main.o threeintsfcts.o
+    g++ main.o threeintsfcts.o -o myprog.exe
+
+main.o : main.cpp threeintsfcts.cpp threeintsfcts.h
+    g++ -Wall -c main.cpp 
+
+threeintsfcts.o : threeintsfcts.cpp threeintsfcts.h
+    g++ -Wall -c threeintsfcts.cpp 
+
+clean :
+    rm *.o myprog.exe
+    
+then just call "make"
+
+command line arguments
+int main(argc, char* argv[]) //argv[0] is the program name
+in the command prompt, putting quotes around words and spaces combine them into a single c-string
 
 RECURSION
 Dividing a problem into smaller and smaller sections. A recursive function calls itself, and must have at least one base case (where the function isn't called further, and a value is returned), each call to the function should bring it closer to the base case. Make sure you handle all base cases
@@ -385,6 +427,8 @@ catch (objectOfExceptionType& e) { //catch block is executed if exception was th
 
 catch block can be outside of function where exception is thrown. The function call hierarchy is traversed until a suitable handler is found
 
+catch (...) {} //Catches any type of exception
+
 OTHER
 #include <cstdlib>
 rand() //Returns a random integer from 0 to RAND_MAX
@@ -399,4 +443,6 @@ srand(time(0)) //Uses time as seed, so the random values are different each run 
 #define
 #endif
 
-THROUGH 12.2
+To do still
+26
+27
