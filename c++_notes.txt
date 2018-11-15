@@ -158,9 +158,11 @@ myString.replace(index, length, subString)
 LOGIC AND FLOW CONTROL
 For loop - 3 fields in for loop are optional, but the 2 semicolons must be included
 For loop - can use comma operator to use multiple iterator variables
-for(declaration : range) statement; - declaration represents an element in range, where range is a container such as an array or string. Helpful to use auto with declaration
-myLabel: -A label
-goto myLabel; - Goes to myLabel
+for(declaration : range) statement; - declaration represents an element in range, where range is a container such as an array or string.
+Helpful to use auto with declaration
+for (String& myString : myVector) //Allows you to modify each element as you iterate
+myLabel: //A label
+goto myLabel; //Goes to myLabel
 
 switch (a) {
    case 0:
@@ -350,7 +352,7 @@ class ChildClass : private ParentClass {};  //public -> private, protected -> pr
 
 class ChildClass : public ParentClass{
 public:
-   ChildClass(string myString) : ParentClass(name) {} //calling parent class constructor
+   ChildClass(string myString, string name) : ParentClass(name) {} //calling parent class constructor
    string ToString(); //Overrides base class's ToString()
 };
 
@@ -429,6 +431,29 @@ catch block can be outside of function where exception is thrown. The function c
 
 catch (...) {} //Catches any type of exception
 
+LIST
+#include <list>
+list<string> myList;
+myList.push_back("hello")
+myList.push_front("hi")
+front, back, pop_front, pop_back, size //self explanatory
+myList.remove("Hi") //removes all instances of specified entry from list
+
+list<int>::iterator iter
+myList.begin(), myList.end() //return iterators to beginning element and one after the last element
+*iter //dereferencing the iterator
+myList.insert(iteratorPosition, newElement) //Inserts the new element just before the location of the iterator
+myList.erase(iteratorPosition)
+myList.erase(start, end) //includes start but doesn't include end
+
+for (string& element : myList)
+
+PAIR
+#inlcude <utility>
+pair<string, int> myPair;
+myPair = make_pair("Hello", 13);
+myPair.first, myPair.second //returns the first/second value
+
 OTHER
 #include <cstdlib>
 rand() //Returns a random integer from 0 to RAND_MAX
@@ -444,5 +469,5 @@ srand(time(0)) //Uses time as seed, so the random values are different each run 
 #endif
 
 To do still
-26
+26.4 - end
 27
